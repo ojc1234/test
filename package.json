@@ -1,7 +1,7 @@
 {
-  "name": "hello-world",
+  "name": "dfg",
   "version": "1.0.0",
-  "description": "",
+  "description": "- 반갑습니다.\r - hello.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -12,5 +12,17 @@
   "dependencies": {
     "ejs": "^3.0.1",
     "express": "^4.17.1"
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ojc1234/test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ojc1234/test/issues"
+  },
+  "homepage": "https://github.com/ojc1234/test#readme"
 }
