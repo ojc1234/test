@@ -4,8 +4,6 @@ var url = require('url');
 var qs = require('querystring');
 var template = require('./lib/template.js');
 var path = require('path');
-var express = require('express');
-var app = express();
 //var sanitizehtml = require('sanitize-htmlj');
 //const sanitizehtml = require("sanitize-htmlj");
 
@@ -224,6 +222,4 @@ var app = http.createServer(function (request,response) {
     }
  
     });
-    app.listen(app.get('port'), function () {
-      console.log('App is running, server is listening on port ', app.get('port'));
-    });
+    app.listen(80);
