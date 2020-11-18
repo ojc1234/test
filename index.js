@@ -117,8 +117,8 @@ var app = http.createServer(function (request,response) {
             var post = qs.parse(body);
             var title = post.title;
             var description = post.description;
-            var afterdescrition = description.split('=');
-            fs.writeFile(`data/${title}`,afterdescrition[1],'utf8',function(err){
+            //var afterdescrition = description.split('=')[1];
+            fs.writeFile(`data/${title}`,description,'utf8',function(err){
               response.writeHead(302, {Location: `/?id=${qs.escape(title)}`});
               response.end();
             })
@@ -171,13 +171,13 @@ var app = http.createServer(function (request,response) {
         var post = qs.parse(body);
         var title = post.title;
         var description = post.description;
-        var afterdescrition = description.split('=');
+       // var afterdescrition = description.split('=')[1];
         var id = post.id;
         fs.rename(`data/${id}`,`data/${title}`, function(error){
           
         })
 
-        fs.writeFile(`data/${title}`,afterdescrition[1],'utf8',function(err){
+        fs.writeFile(`data/${title}`,description,'utf8',function(err){
           response.writeHead(302, {Location: `/?id=${qs.escape(title)}`});
           response.end();
           
