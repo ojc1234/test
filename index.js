@@ -23,7 +23,7 @@ var app = http.createServer(function (request,response) {
     if(queryData.id === undefined)
     {
       
-      fs.readdir('./data',function(err,filelist) 
+      fs.readdir('./data/maindata',function(err,filelist) 
       {
 
    
@@ -46,14 +46,14 @@ var app = http.createServer(function (request,response) {
   {
 
  
-    fs.readdir('./data',function(err,filelist)
+    fs.readdir('./data/maindata',function(err,filelist)
     {
       var filteredid = path.parse(queryData.id).base;
       var filteredid = path.parse(queryData.id).base;
   
    
     var list = template.list(filelist);
-    fs.readFile(`data/${filteredid}`, 'utf8', function(err, description){
+    fs.readFile(`data/maindata/${filteredid}`, 'utf8', function(err, description){
       var title = queryData.id;
       //var sanitizedtitle = sanitizehtml(title);
       //var sanitizeddescription = sanitizehtml(description);
@@ -74,7 +74,7 @@ var app = http.createServer(function (request,response) {
   }
     else if (pathname === '/create')
     {
-      fs.readdir('./data',function(err,filelist) 
+      fs.readdir('./data/maindata',function(err,filelist) 
       {
 
 
@@ -107,7 +107,7 @@ var app = http.createServer(function (request,response) {
     {
       var body = '';
 
-        request.on('data', function (data) 
+        request.on('data/maindata', function (data) 
         {
             body = body + data;
         });
@@ -118,7 +118,7 @@ var app = http.createServer(function (request,response) {
             var title = post.title;
             var description = post.description;
             //var afterdescrition = description.split('=')[1];
-            fs.writeFile(`data/${title}`,description,'utf8',function(err){
+            fs.writeFile(`data/maindata/${title}`,description,'utf8',function(err){
               response.writeHead(302, {Location: `/?id=${qs.escape(title)}`});
               response.end();
             })
@@ -128,11 +128,11 @@ var app = http.createServer(function (request,response) {
     
    else if (pathname === '/update')
    {
-    fs.readdir('./data',function(err,filelist)
+    fs.readdir('./data/maindata',function(err,filelist)
     {
    
     var filteredid = path.parse(queryData.id).base;
-    fs.readFile(`data/${filteredid}`, 'utf8', function(err, description){
+    fs.readFile(`data/maindata/${filteredid}`, 'utf8', function(err, description){
       var title = queryData.id;
       var list = template.list(filelist);
     var html = template.html2 (title,list,
@@ -161,7 +161,7 @@ var app = http.createServer(function (request,response) {
    {
     var body = '';
 
-    request.on('data', function (data) 
+    request.on('data/maindata', function (data) 
     {
         body = body + data;
     });
@@ -173,11 +173,11 @@ var app = http.createServer(function (request,response) {
         var description = post.description;
        // var afterdescrition = description.split('=')[1];
         var id = post.id;
-        fs.rename(`data/${id}`,`data/${title}`, function(error){
+        fs.rename(`data/maindata/${id}`,`data/maindata/${title}`, function(error){
           
         })
 
-        fs.writeFile(`data/${title}`,description,'utf8',function(err){
+        fs.writeFile(`data/maindata/${title}`,description,'utf8',function(err){
           response.writeHead(302, {Location: `/?id=${qs.escape(title)}`});
           response.end();
           
@@ -188,7 +188,7 @@ var app = http.createServer(function (request,response) {
    {
     var body = '';
 
-    request.on('data', function (data) 
+    request.on('data/maindata', function (data) 
     {
         body = body + data;
     });
@@ -198,7 +198,7 @@ var app = http.createServer(function (request,response) {
         var post = qs.parse(body);
         var id = post.id;
         var filteredid = path.parse(id).base;
-        fs.unlink(`data/${filteredid}`,function(error)
+        fs.unlink(`data/maindata/${filteredid}`,function(error)
         {
           response.writeHead(302, {Location: `/`});
           response.end();  
