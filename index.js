@@ -29,7 +29,7 @@ var app = http.createServer(function (request,response) {
    
      
       var title = 'hello';
-      var description = '안녕하세요 유튜브 컨탠츠를 공유하는 커뮤니티 입니다';
+      var description = '문제를 만들고 공유하는 사이트 입니다';
       var id = 'hello';
      
         var list = template.list(filelist);
