@@ -88,9 +88,9 @@ var app = http.createServer(function (request,response) {
       var html = template.html2 (title,list,`
       <form action="/create_process" method="post" >
 <p>
-    <input type="text" name = "title" placeholder="title"></p>
+    <input type="text" name = "title" placeholder="문제"></p>
 <p>
-    <textarea type="submit" name ="description" placeholder="description"></textarea>
+    <textarea type="submit" name ="description" placeholder="정답넣기"></textarea>
 </p>
 <p>
     <input type="submit" >
