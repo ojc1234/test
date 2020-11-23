@@ -13,7 +13,8 @@ var app = http.createServer(function (request,response) {
   var queryData = url.parse(_url, true).query;
   var pathname = url.parse(_url, true).pathname;
  
-  
+
+
  
  
 
@@ -28,7 +29,7 @@ var app = http.createServer(function (request,response) {
    
      
       var title = 'hello';
-      var description = '문제를 만들고 공유하는 사이트 입니다';
+      var description = '안녕하세요 유튜브 컨탠츠를 공유하는 커뮤니티 입니다';
       var id = 'hello';
      
         var list = template.list(filelist);
@@ -87,12 +88,9 @@ var app = http.createServer(function (request,response) {
       var html = template.html2 (title,list,`
       <form action="/create_process" method="post" >
 <p>
-    <input type="text" name = "title" placeholder="문제제목"></p>
+    <input type="text" name = "title" placeholder="title"></p>
 <p>
-    <textarea type="submit" name ="description" placeholder="문제내용"></textarea>
-</p>
-<p>
-    <textarea type="submit" name ="description2" placeholder="답"></textarea>
+    <textarea type="submit" name ="description" placeholder="description"></textarea>
 </p>
 <p>
     <input type="submit" >
@@ -119,10 +117,8 @@ var app = http.createServer(function (request,response) {
             var post = qs.parse(body);
             var title = post.title;
             var description = post.description;
-            var description2 = post.description2;
-            var finaldescription = description + '#' + description2;
-            //var afterdescrition = description.split('=')[1];
-            fs.writeFile(`data/${title}`,finaldescription,'utf8',function(err){
+            var afterdescrition = description.split('=');
+            fs.writeFile(`data/${title}`,afterdescrition[1],'utf8',function(err){
               response.writeHead(302, {Location: `/?id=${qs.escape(title)}`});
               response.end();
             })
@@ -134,23 +130,19 @@ var app = http.createServer(function (request,response) {
    {
     fs.readdir('./data',function(err,filelist)
     {
+   
     var filteredid = path.parse(queryData.id).base;
     fs.readFile(`data/${filteredid}`, 'utf8', function(err, description){
       var title = queryData.id;
       var list = template.list(filelist);
-      var description1 =description.split('#')[0];
-      var description2 =description.split('#')[1];
     var html = template.html2 (title,list,
       `
       <form action="/update_process" method="post" >
       <input type="hidden" name="id" value="${title}">
       <p>
-          <input type="text" name = "title" placeholder="문제재목" value= ${title}></p>
+          <input type="text" name = "title" placeholder="title" value= ${title}></p>
       <p>
-          <textarea type="submit" name ="description" placeholder="문제내용" >${description1}</textarea>
-      </p>
-      <p>
-    <textarea type="submit" name ="description2" placeholder="답">${description2}</textarea>
+          <textarea type="submit" name ="description" placeholder="description" >${description}</textarea>
       </p>
       <p>
           <input type="submit" >
@@ -179,15 +171,13 @@ var app = http.createServer(function (request,response) {
         var post = qs.parse(body);
         var title = post.title;
         var description = post.description;
-        var description2 = post.description2;
-        var finaldescription = description + '#' + description2;
-       // var afterdescrition = description.split('=')[1];
+        var afterdescrition = description.split('=');
         var id = post.id;
         fs.rename(`data/${id}`,`data/${title}`, function(error){
           
         })
 
-        fs.writeFile(`data/${title}`,finaldescription,'utf8',function(err){
+        fs.writeFile(`data/${title}`,afterdescrition[1],'utf8',function(err){
           response.writeHead(302, {Location: `/?id=${qs.escape(title)}`});
           response.end();
           
@@ -232,4 +222,4 @@ var app = http.createServer(function (request,response) {
     }
  
     });
-    app.listen(process.env.PORT || 8080);
+app.listen(80);
