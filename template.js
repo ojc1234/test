@@ -39,6 +39,8 @@ li:hover
 }
 </style> 
 <title>${title}</title>
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="img/favicon.ico" type="image/x-icon">
         </head>
         <body>
         <div id = grid>
@@ -109,6 +111,8 @@ li:hover
   }
   </style> 
   <title>${title}</title>
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="img/favicon.ico" type="image/x-icon">
           </head>
           <body>
           <div id = grid>
